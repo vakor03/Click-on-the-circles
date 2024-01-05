@@ -1,6 +1,6 @@
 ﻿using System;
-using _Project.Scripts.Score;
-using _Project.Scripts.Timer;
+using _Project.Scripts.Core.Score;
+using _Project.Scripts.Core.Timer;
 using UnityEngine;
 using Zenject;
 
@@ -9,13 +9,13 @@ namespace _Project.Scripts
     public class TestStarter : MonoBehaviour
     {
         private ITimer _timer;
-        private IScoreCounterService _scoreCounterService;
+        private IScoreCounter _scoreCounter;
         
         [Inject]
-        private void Construct(ITimer timer, IScoreCounterService scoreCounterService)
+        private void Construct(ITimer timer, IScoreCounter scoreCounter)
         {
             _timer = timer;
-            _scoreCounterService = scoreCounterService;
+            _scoreCounter = scoreCounter;
             
             _timer.OnTimerFinished += HandleTimerFinished;
         }
@@ -29,12 +29,12 @@ namespace _Project.Scripts
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _scoreCounterService.AddScore(10);
+                _scoreCounter.AddScore(10);
             }
             
             if (Input.GetKeyDown(KeyCode.R))
             {
-                _scoreCounterService.ResetScore();
+                _scoreCounter.Reset();
             }
         }
 

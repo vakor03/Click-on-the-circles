@@ -2,16 +2,16 @@
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Score
+namespace _Project.Scripts.Core.Score
 {
     public class ScoreCounterUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI scoreText;
         
-        private IScoreCounterService _scoreCounter;
+        private IScoreCounter _scoreCounter;
         
         [Inject]
-        private void Construct(IScoreCounterService scoreCounter)
+        private void Construct(IScoreCounter scoreCounter)
         {
             _scoreCounter = scoreCounter;
         }

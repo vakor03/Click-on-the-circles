@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace _Project.Scripts.Score
+namespace _Project.Scripts.Core.Score
 {
-    public interface IScoreCounterService
+    public interface IScoreCounter
     {
         int CurrentScore { get; }
         void AddScore(int score);
-        void ResetScore();
+        void Reset();
         event Action OnScoreChanged;
     }
 }

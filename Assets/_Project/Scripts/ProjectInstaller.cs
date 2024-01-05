@@ -1,5 +1,5 @@
-﻿using _Project.Scripts.Score;
-using _Project.Scripts.Timer;
+﻿using _Project.Scripts.Core.Score;
+using _Project.Scripts.Core.Timer;
 using Zenject;
 
 namespace _Project.Scripts
@@ -14,7 +14,7 @@ namespace _Project.Scripts
 
         private void BindScoreCounterService()
         {
-            Container.BindInterfacesAndSelfTo<ScoreCounterService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ScoreCounter>().AsSingle();
         }
 
         private void BindTimerService()

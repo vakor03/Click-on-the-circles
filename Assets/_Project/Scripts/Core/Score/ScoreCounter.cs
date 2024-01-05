@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace _Project.Scripts.Score
+namespace _Project.Scripts.Core.Score
 {
-    public class ScoreCounterService : IScoreCounterService
+    public class ScoreCounter : IScoreCounter
     {
         public int CurrentScore { get; private set; }
 
@@ -12,7 +12,7 @@ namespace _Project.Scripts.Score
             OnScoreChanged?.Invoke();
         }
 
-        public void ResetScore()
+        public void Reset()
         {
             CurrentScore = 0;
             OnScoreChanged?.Invoke();

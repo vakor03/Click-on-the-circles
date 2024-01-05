@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Timer
+namespace _Project.Scripts.Core.Timer
 {
     public class TimerUI : MonoBehaviour
     {

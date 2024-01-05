@@ -2,12 +2,17 @@ using System;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Timer
+namespace _Project.Scripts.Core.Timer
 {
     public class TimerService : ITimer, ITickable
     {
-        public float MaxTime { get; private set; } = 10f;
+        public float MaxTime { get; private set; }
         public float CurrentTime { get; private set; }
+
+        public void Initialize(float maxTime)
+        {
+            MaxTime = maxTime;
+        }
 
         public event Action OnTimerStarted;
         public event Action OnTimerFinished;
@@ -39,6 +44,11 @@ namespace _Project.Scripts.Timer
         {
             _isTimerRunning = false;
             OnTimerFinished?.Invoke();
+        }
+
+        public void Reset()
+        {
+            CurrentTime = 0f;
         }
     }
 }
