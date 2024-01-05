@@ -4,7 +4,7 @@
     {
         public void Enter()
         {
-            throw new System.NotImplementedException();
+            UnityEngine.Debug.Log("Game Over");
         }
 
         public void Exit()

@@ -1,5 +1,8 @@
 ﻿using _Project.Scripts.Core.Score;
 using _Project.Scripts.Core.Timer;
+using _Project.Scripts.Infrastructure.AssetProviders;
+using _Project.Scripts.Infrastructure.SceneLoader;
+using _Project.Scripts.Infrastructure.StateMachines;
 using Zenject;
 
 namespace _Project.Scripts
@@ -8,8 +11,41 @@ namespace _Project.Scripts
     {
         public override void InstallBindings()
         {
+            BindSceneLoader();
+            
             BindTimerService();
             BindScoreCounterService();
+
+            BindStaticDataService();
+            BindAssetProvider();
+            
+            BindStatesFactory();
+            BindGameStateMachine();
+        }
+
+        private void BindAssetProvider()
+        {
+            Container.BindInterfacesAndSelfTo<AssetProvider>().AsSingle();
+        }
+
+        private void BindStaticDataService()
+        {
+            Container.BindInterfacesAndSelfTo<StaticDataService>().AsSingle();
+        }
+
+        private void BindSceneLoader()
+        {
+            Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();
+        }
+
+        private void BindGameStateMachine()
+        {
+            Container.Bind<GameStateMachine>().AsSingle();
+        }
+
+        private void BindStatesFactory()
+        {
+            Container.Bind<StatesFactory>().AsSingle();
         }
 
         private void BindScoreCounterService()

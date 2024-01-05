@@ -1,34 +1,34 @@
-﻿using _Project.Scripts.Core.Score;
-using _Project.Scripts.Core.Timer;
-using _Project.Scripts.Infrastructure.AssetProviders;
+﻿using _Project.Scripts.Core.Timer;
 
 namespace _Project.Scripts.Infrastructure.StateMachines.States
 {
     public class GameState : IState
     {
         private ITimer _timer;
-        private IScoreCounter _scoreCounter;
-        private readonly StaticDataService _staticDataService;
+        private GameStateMachine _gameStateMachine;
 
         public GameState(ITimer timer, 
-            IScoreCounter scoreCounter, 
-            StaticDataService staticDataService)
+            GameStateMachine gameStateMachine)
         {
             _timer = timer;
-            _scoreCounter = scoreCounter;
-            _staticDataService = staticDataService;
+            _gameStateMachine = gameStateMachine;
         }
 
         public void Enter()
         {
-            _timer.Reset();
-            _scoreCounter.Reset();
+            _timer.OnTimerFinished += HandleTimerFinished;
+            _timer.StartTimer();
+        }
 
-            _timer.Initialize(_staticDataService.GetTimerConfig().MaxTimer);
+        private void HandleTimerFinished()
+        {
+           _gameStateMachine.Enter<GameOverState>(); 
         }
 
         public void Exit()
         {
+            _timer.Reset();
+            _timer.OnTimerFinished -= HandleTimerFinished;
         }
     }
 }

@@ -7,15 +7,15 @@ namespace _Project.Scripts.Core.Timer
     public class TimerUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI timerText;
-        
-        private ITimer _timer;
+
+        private TimerService _timer;
 
         [Inject]
-        private void Construct(ITimer timer)
+        private void Construct(TimerService timer)
         {
             _timer = timer;
         }
-        
+
         private void OnEnable()
         {
             _timer.OnTimerStarted += HandleTimerStarted;
@@ -26,9 +26,9 @@ namespace _Project.Scripts.Core.Timer
         private void HandleTimerTicked()
         {
             float timeLeft = _timer.MaxTime - _timer.CurrentTime;
-            int seconds = (int) timeLeft; 
-            int millis = (int) (timeLeft * 100) % 100;
-            
+            int seconds = (int)timeLeft;
+            int millis = (int)(timeLeft * 100) % 100;
+
             timerText.text = $"{seconds}:{millis}";
         }
 

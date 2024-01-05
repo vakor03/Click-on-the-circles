@@ -19,9 +19,10 @@ namespace _Project.Scripts.Infrastructure.Bootstraps
 
         private void Start()
         {
-            _gameStateMachine.RegisterState(_statesFactory.Create<GameState>());
+            _gameStateMachine.RegisterState(_statesFactory.Create<LoadGameState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<MainMenuState>());
             _gameStateMachine.RegisterState(_statesFactory.Create<GameOverState>());
+            _gameStateMachine.RegisterState(_statesFactory.Create<GameState>());
 
             _gameStateMachine.Enter<MainMenuState>();
             DontDestroyOnLoad(this);

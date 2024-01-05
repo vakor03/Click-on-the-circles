@@ -6,6 +6,6 @@ namespace _Project.Scripts.Infrastructure.AssetProviders
         public const string BOOTSTRAP_SCENE_NAME = "Bootstrap";
         public const string GAME_SCENE_NAME = "Game";
         
-        public const string TIMER_CONFIG = "Configs/TimerConfig";
+        public const string TIMER_CONFIG = "Configs/TimerConfigSO";
     }
 }

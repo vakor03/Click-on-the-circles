@@ -7,7 +7,6 @@ namespace _Project.Scripts.Core.Timer
         float MaxTime { get; }
         float CurrentTime { get; }
         void StartTimer();
-        void StopTimer();
         void Reset();
         void Initialize(float maxTime);
         event Action OnTimerStarted;

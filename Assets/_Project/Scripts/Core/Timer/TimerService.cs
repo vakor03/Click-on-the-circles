@@ -38,9 +38,10 @@ namespace _Project.Scripts.Core.Timer
             CurrentTime = 0f;
             _isTimerRunning = true;
             OnTimerStarted?.Invoke();
+            Debug.Log("Timer started");
         }
 
-        public void StopTimer()
+        private void StopTimer()
         {
             _isTimerRunning = false;
             OnTimerFinished?.Invoke();
@@ -49,6 +50,7 @@ namespace _Project.Scripts.Core.Timer
         public void Reset()
         {
             CurrentTime = 0f;
+            _isTimerRunning = false;
         }
     }
 }
