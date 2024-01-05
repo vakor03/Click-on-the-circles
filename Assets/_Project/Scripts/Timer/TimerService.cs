@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.Timer
 {
     public class TimerService : ITimer, ITickable
     {
