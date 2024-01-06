@@ -2,14 +2,20 @@
 {
     public class GameOverState : IState
     {
+        private GameOverStateObserver _gameOverStateObserver;
+
+        public GameOverState(GameOverStateObserver gameOverStateObserver)
+        {
+            _gameOverStateObserver = gameOverStateObserver;
+        }
+
         public void Enter()
         {
-            UnityEngine.Debug.Log("Game Over");
+            _gameOverStateObserver.SetGameOver(true);
         }
 
         public void Exit()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

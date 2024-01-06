@@ -12,15 +12,22 @@ namespace _Project.Scripts
         public override void InstallBindings()
         {
             BindSceneLoader();
-            
+
             BindTimerService();
             BindScoreCounterService();
 
             BindStaticDataService();
             BindAssetProvider();
-            
+
+            BindGameOverStateObserver();
+
             BindStatesFactory();
             BindGameStateMachine();
+        }
+
+        private void BindGameOverStateObserver()
+        {
+            Container.BindInterfacesAndSelfTo<GameOverStateObserver>().AsSingle();
         }
 
         private void BindAssetProvider()

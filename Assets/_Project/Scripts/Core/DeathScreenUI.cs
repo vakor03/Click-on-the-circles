@@ -11,21 +11,29 @@ namespace _Project.Scripts.Core
         [SerializeField] private TextMeshProUGUI scoreText;
         
         private IScoreCounter _scoreCounter;
+        private GameOverStateObserver _gameOverStateObserver;
 
         [Inject]
-        private void Construct(IScoreCounter scoreCounter)
+        private void Construct(IScoreCounter scoreCounter,
+            GameOverStateObserver gameOverStateObserver)
         {
             _scoreCounter = scoreCounter;
+            _gameOverStateObserver = gameOverStateObserver;
         }
         
         private void OnEnable()
         {
             _scoreCounter.OnScoreChanged += HandleScoreChanged;
+            _gameOverStateObserver.OnGameOverStateChanged += HandleGameOverChanged;
+            
+            UpdateIsActive();
+            UpdateScoreText();
         }
 
         private void OnDisable()
         {
             _scoreCounter.OnScoreChanged -= HandleScoreChanged;
+            _gameOverStateObserver.OnGameOverStateChanged -= HandleGameOverChanged;
         }
 
         private void UpdateScoreText()
@@ -33,19 +41,19 @@ namespace _Project.Scripts.Core
             scoreText.text = $"Score: {_scoreCounter.CurrentScore}";
         }
 
+        private void UpdateIsActive()
+        {
+            parent.gameObject.SetActive(_gameOverStateObserver.IsGameOver);
+        }
+
+        private void HandleGameOverChanged()
+        {
+            UpdateIsActive();
+        }
+
         private void HandleScoreChanged()
         {
             UpdateScoreText();
-        }
-
-        public void Show()
-        {
-            parent.gameObject.SetActive(true);
-        }
-        
-        public void Hide()
-        {
-            parent.gameObject.SetActive(false);
         }
     }
 }

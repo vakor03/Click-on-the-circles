@@ -6,16 +6,20 @@ namespace _Project.Scripts.Infrastructure.StateMachines.States
     {
         private ITimer _timer;
         private GameStateMachine _gameStateMachine;
+        private GameOverStateObserver _gameOverStateObserver;
 
         public GameState(ITimer timer, 
-            GameStateMachine gameStateMachine)
+            GameStateMachine gameStateMachine, 
+            GameOverStateObserver gameOverStateObserver)
         {
             _timer = timer;
             _gameStateMachine = gameStateMachine;
+            _gameOverStateObserver = gameOverStateObserver;
         }
 
         public void Enter()
         {
+            _gameOverStateObserver.SetGameOver(false);
             _timer.OnTimerFinished += HandleTimerFinished;
             _timer.StartTimer();
         }
