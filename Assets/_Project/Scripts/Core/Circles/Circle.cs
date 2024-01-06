@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using DG.Tweening;
 using MEC;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Core.Circles
 {
-    // TODO: Add circle size and color
-    // TODO: Animation for circle
-    // TODO: Animation for circle click
     // TODO: Handle circle click(add score)
     // TODO: Circle spawn
     // TODO: Countdown timer
@@ -17,21 +13,29 @@ namespace _Project.Scripts.Core.Circles
     public class Circle : MonoBehaviour
     {
         [SerializeField] private CircleCollider2D circleCollider2D;
-        [SerializeField] private float _size;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        
         private Color _color;
-        [SerializeField]
-        private float _lifeTime = 5f;
-
-        [SerializeField] private float startScale = 0.1f;
-
-
-        [SerializeField] private float _growDuration;
-
-        [SerializeField] private float _popDuration;
-
-        [SerializeField] private float popScale = 1.5f;
+        private float _size;
+        private float _lifeTime;
+        private float _startScale;
+        private float _growDuration;
+        private float _popDuration;
+        private float _popScale;
 
         public event Action<Circle> OnCircleClicked;
+
+        public void Initialize(Color color, float size, float lifetime, CircleAnimationConfigSO circleAnimationConfigSO)
+        {
+            _size = size;
+            _lifeTime = lifetime;
+            _startScale = circleAnimationConfigSO.startScale;
+            _growDuration = circleAnimationConfigSO.growDuration;
+            _popDuration = circleAnimationConfigSO.popDuration;
+            _popScale = circleAnimationConfigSO.popScale;
+            
+            spriteRenderer.color = color;
+        }
 
         private void Update()
         {
@@ -40,7 +44,6 @@ namespace _Project.Scripts.Core.Circles
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 if (circleCollider2D.OverlapPoint(mousePosition))
                 {
-                    Debug.Log("Circle clicked");
                     OnCircleClicked?.Invoke(this);
                     RunPopUpAnimation();
                 }
@@ -58,7 +61,7 @@ namespace _Project.Scripts.Core.Circles
 
             Sequence popSequence = DOTween.Sequence();
 
-            popSequence.Append(transform.DOScale(popScale * currentScale, _popDuration / 2));
+            popSequence.Append(transform.DOScale(_popScale * currentScale, _popDuration / 2));
             popSequence.Append(transform.DOScale(currentScale, _popDuration / 2));
             popSequence.OnComplete(DestroySelf);
 
@@ -67,7 +70,7 @@ namespace _Project.Scripts.Core.Circles
 
         private void RunGrowAnimation()
         {
-            transform.localScale = Vector3.one * startScale;
+            transform.localScale = Vector3.one * _startScale * _size;
 
             Sequence growSequence = DOTween.Sequence();
 
@@ -78,7 +81,7 @@ namespace _Project.Scripts.Core.Circles
 
         private void StartCountdown()
         {
-            Timing.RunCoroutine(CountdownCoroutine());
+            Timing.RunCoroutine(CountdownCoroutine().CancelWith(gameObject));
         }
 
         private IEnumerator<float> CountdownCoroutine()
@@ -86,7 +89,7 @@ namespace _Project.Scripts.Core.Circles
             yield return Timing.WaitForSeconds(_lifeTime);
             DestroySelf();
         }
-        
+
         private void DestroySelf()
         {
             Destroy(gameObject);

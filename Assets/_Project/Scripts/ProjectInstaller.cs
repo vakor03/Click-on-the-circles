@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Core.Score;
+﻿using _Project.Scripts.Core.Circles;
+using _Project.Scripts.Core.Score;
 using _Project.Scripts.Core.Timer;
 using _Project.Scripts.Infrastructure.AssetProviders;
 using _Project.Scripts.Infrastructure.SceneLoader;
@@ -12,17 +13,23 @@ namespace _Project.Scripts
         public override void InstallBindings()
         {
             BindSceneLoader();
+            BindStaticDataService();
 
             BindTimerService();
             BindScoreCounterService();
 
-            BindStaticDataService();
+            BindCircleFactory();
             BindAssetProvider();
 
             BindGameOverStateObserver();
 
             BindStatesFactory();
             BindGameStateMachine();
+        }
+
+        private void BindCircleFactory()
+        {
+            Container.BindInterfacesAndSelfTo<CircleFactory>().AsSingle();
         }
 
         private void BindGameOverStateObserver()

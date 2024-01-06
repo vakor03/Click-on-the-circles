@@ -7,5 +7,8 @@ namespace _Project.Scripts.Infrastructure.AssetProviders
         public const string GAME_SCENE_NAME = "Game";
         
         public const string TIMER_CONFIG = "Configs/TimerConfigSO";
+        public const string CIRCLE_CONFIG = "Configs/CircleConfigSO";
+        public const string CIRCLE_ANIMATION_CONFIG = "Configs/CircleAnimationConfigSO";
+        public const string CIRCLE_SPAWNER_CONFIG = "Configs/CircleSpawnerConfigSO";
     }
 }
