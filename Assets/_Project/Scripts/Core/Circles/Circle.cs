@@ -21,6 +21,9 @@ namespace _Project.Scripts.Core.Circles
         private float _growDuration;
         private float _popDuration;
         private float _popScale;
+        
+        private Sequence _popSequence;
+        private Sequence _growSequence;
 
         public event Action<Circle> OnCircleClicked;
         public event Action<Circle> OnCircleDestroyed;
@@ -55,28 +58,34 @@ namespace _Project.Scripts.Core.Circles
             RunGrowAnimation();
         }
 
+        private void OnDestroy()
+        {
+            _growSequence?.Kill();
+            _popSequence?.Kill();
+        }
+
         private void RunPopUpAnimation()
         {
             var currentScale = transform.localScale;
 
-            Sequence popSequence = DOTween.Sequence();
+            _popSequence = DOTween.Sequence();
 
-            popSequence.Append(transform.DOScale(_popScale * currentScale, _popDuration / 2));
-            popSequence.Append(transform.DOScale(currentScale, _popDuration / 2));
-            popSequence.OnComplete(DestroySelf);
+            _popSequence.Append(transform.DOScale(_popScale * currentScale, _popDuration / 2));
+            _popSequence.Append(transform.DOScale(currentScale, _popDuration / 2));
+            _popSequence.OnComplete(DestroySelf);
 
-            popSequence.Play();
+            _popSequence.Play();
         }
 
         private void RunGrowAnimation()
         {
             transform.localScale = Vector3.one * _startScale * _size;
 
-            Sequence growSequence = DOTween.Sequence();
+            _growSequence = DOTween.Sequence();
 
-            growSequence.Append(transform.DOScale(Vector3.one * _size, _growDuration));
-            growSequence.OnComplete(StartCountdown);
-            growSequence.Play();
+            _growSequence.Append(transform.DOScale(Vector3.one * _size, _growDuration));
+            _growSequence.OnComplete(StartCountdown);
+            _growSequence.Play();
         }
 
         private void StartCountdown()
