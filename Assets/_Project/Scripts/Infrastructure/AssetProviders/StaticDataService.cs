@@ -1,5 +1,5 @@
-﻿using _Project.Scripts.Core.Circles;
-using _Project.Scripts.Infrastructure.Configs;
+﻿using _Project.Scripts.Configs;
+using _Project.Scripts.Core.Circles;
 using UnityEngine;
 using Zenject;
 

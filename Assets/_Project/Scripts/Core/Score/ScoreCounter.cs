@@ -5,7 +5,7 @@ namespace _Project.Scripts.Core.Score
     public class ScoreCounter : IScoreCounter
     {
         public int CurrentScore { get; private set; }
-
+        
         public void AddScore(int score)
         {
             CurrentScore += score;

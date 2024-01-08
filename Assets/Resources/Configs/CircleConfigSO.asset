@@ -22,3 +22,5 @@ MonoBehaviour:
   maxSize: 1.3
   minLifetime: 3
   maxLifetime: 5
+  scorePerCircle: 1
+  timeToRemoveOnCircleClick: 0.2

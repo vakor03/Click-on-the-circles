@@ -1,6 +1,4 @@
-﻿using _Project.Scripts.Infrastructure.StateMachines.States;
-
-namespace _Project.Scripts.Infrastructure.StateMachines
+﻿namespace _Project.Scripts.Infrastructure.StateMachines
 {
     public interface IStateMachine
     {

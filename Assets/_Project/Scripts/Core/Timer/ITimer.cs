@@ -9,6 +9,7 @@ namespace _Project.Scripts.Core.Timer
         void StartTimer();
         void Reset();
         void Initialize(float maxTime);
+        void RemoveTime(float timeToRemove);
         event Action OnTimerStarted;
         event Action OnTimerFinished;
         event Action OnTimerTicked;

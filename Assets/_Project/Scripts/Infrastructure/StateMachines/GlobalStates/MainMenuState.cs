@@ -1,7 +1,7 @@
 ﻿using _Project.Scripts.Infrastructure.AssetProviders;
 using _Project.Scripts.Infrastructure.SceneLoader;
 
-namespace _Project.Scripts.Infrastructure.StateMachines.States
+namespace _Project.Scripts.Infrastructure.StateMachines.GlobalStates
 {
     public class MainMenuState : IState
     {

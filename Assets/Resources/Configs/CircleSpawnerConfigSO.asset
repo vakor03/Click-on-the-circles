@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0eb44f3a214025a16ef54a669544d3, type: 3}
   m_Name: CircleSpawnerConfigSO
   m_EditorClassIdentifier: 
-  spawnInterval: 3
+  spawnInterval: 2
   spawnIntervalDecrease: 0.2
-  minSpawnInterval: 1
+  minSpawnInterval: 0.5
+  startSpawnInterval: 0.2
   minSpawnCount: 1
   maxSpawnCount: 4
+  maxSpawnTotal: 20

@@ -1,12 +1,10 @@
-﻿using _Project.Scripts.Core.Circles;
-using _Project.Scripts.Core.Score;
+﻿using _Project.Scripts.Core.Score;
 using _Project.Scripts.Core.Timer;
 using _Project.Scripts.Infrastructure.AssetProviders;
-using _Project.Scripts.Infrastructure.SceneLoader;
 using _Project.Scripts.Infrastructure.StateMachines;
 using Zenject;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.Infrastructure.Installers
 {
     public class ProjectInstaller : MonoInstaller
     {
@@ -18,23 +16,10 @@ namespace _Project.Scripts
             BindTimerService();
             BindScoreCounterService();
 
-            BindCircleFactory();
             BindAssetProvider();
-
-            BindGameOverStateObserver();
 
             BindStatesFactory();
             BindGameStateMachine();
-        }
-
-        private void BindCircleFactory()
-        {
-            Container.BindInterfacesAndSelfTo<CircleFactory>().AsSingle();
-        }
-
-        private void BindGameOverStateObserver()
-        {
-            Container.BindInterfacesAndSelfTo<GameOverStateObserver>().AsSingle();
         }
 
         private void BindAssetProvider()
@@ -49,12 +34,12 @@ namespace _Project.Scripts
 
         private void BindSceneLoader()
         {
-            Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SceneLoader.SceneLoader>().AsSingle();
         }
 
         private void BindGameStateMachine()
         {
-            Container.Bind<GameStateMachine>().AsSingle();
+            Container.Bind<GlobalStateMachine>().AsSingle();
         }
 
         private void BindStatesFactory()

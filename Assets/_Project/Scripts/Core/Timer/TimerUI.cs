@@ -8,18 +8,16 @@ namespace _Project.Scripts.Core.Timer
     {
         [SerializeField] private TextMeshProUGUI timerText;
 
-        private TimerService _timer;
+        private ITimer _timer;
 
         [Inject]
-        private void Construct(TimerService timer)
+        private void Construct(ITimer timer)
         {
             _timer = timer;
         }
 
         private void OnEnable()
         {
-            _timer.OnTimerStarted += HandleTimerStarted;
-            _timer.OnTimerFinished += HandleTimerFinished;
             _timer.OnTimerTicked += HandleTimerTicked;
         }
 
@@ -32,20 +30,8 @@ namespace _Project.Scripts.Core.Timer
             timerText.text = $"{seconds}:{millis}";
         }
 
-        private void HandleTimerFinished()
-        {
-            // no-op
-        }
-
-        private void HandleTimerStarted()
-        {
-            // no-op
-        }
-
         private void OnDisable()
         {
-            _timer.OnTimerStarted -= HandleTimerStarted;
-            _timer.OnTimerFinished -= HandleTimerFinished;
             _timer.OnTimerTicked -= HandleTimerTicked;
         }
     }

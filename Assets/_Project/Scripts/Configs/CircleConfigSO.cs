@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using _Project.Scripts.Core.Circles;
+using UnityEngine;
 
-namespace _Project.Scripts.Core.Circles
+namespace _Project.Scripts.Configs
 {
     [CreateAssetMenu(menuName = "Configs/CircleConfig", fileName = "CircleConfigSO", order = 0)]
     public class CircleConfigSO : ScriptableObject
@@ -11,5 +12,7 @@ namespace _Project.Scripts.Core.Circles
         public float maxSize;
         public float minLifetime;
         public float maxLifetime;
+        public int scorePerCircle;
+        public float timeToRemoveOnCircleClick;
     }
 }

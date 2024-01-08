@@ -1,5 +1,6 @@
 ﻿using _Project.Scripts.Infrastructure.StateMachines;
-using _Project.Scripts.Infrastructure.StateMachines.States;
+using _Project.Scripts.Infrastructure.StateMachines.GameplayStates;
+using _Project.Scripts.Infrastructure.StateMachines.GlobalStates;
 using UnityEngine;
 using Zenject;
 
@@ -7,24 +8,23 @@ namespace _Project.Scripts.Infrastructure.Bootstraps
 {
     public class Bootstrapper : MonoBehaviour
     {
-        private GameStateMachine _gameStateMachine;
+        private GlobalStateMachine _globalStateMachine;
         private StatesFactory _statesFactory;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine, StatesFactory statesFactory)
+        private void Construct(GlobalStateMachine globalStateMachine, StatesFactory statesFactory)
         {
-            _gameStateMachine = gameStateMachine;
+            _globalStateMachine = globalStateMachine;
             _statesFactory = statesFactory;
         }
 
         private void Start()
         {
-            _gameStateMachine.RegisterState(_statesFactory.Create<LoadGameState>());
-            _gameStateMachine.RegisterState(_statesFactory.Create<MainMenuState>());
-            _gameStateMachine.RegisterState(_statesFactory.Create<GameOverState>());
-            _gameStateMachine.RegisterState(_statesFactory.Create<GameState>());
-
-            _gameStateMachine.Enter<MainMenuState>();
+            _globalStateMachine.RegisterState(_statesFactory.Create<MainMenuState>());
+            _globalStateMachine.RegisterState(_statesFactory.Create<GameplayState>());
+            _globalStateMachine.RegisterState(_statesFactory.Create<QuitState>());
+            
+            _globalStateMachine.Enter<MainMenuState>();
             DontDestroyOnLoad(this);
         }
     }

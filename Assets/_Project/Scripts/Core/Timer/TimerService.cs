@@ -14,6 +14,11 @@ namespace _Project.Scripts.Core.Timer
             MaxTime = maxTime;
         }
 
+        public void RemoveTime(float timeToRemove)
+        {
+            CurrentTime -= timeToRemove;
+        }
+
         public event Action OnTimerStarted;
         public event Action OnTimerFinished;
         public event Action OnTimerTicked;
@@ -38,7 +43,6 @@ namespace _Project.Scripts.Core.Timer
             CurrentTime = 0f;
             _isTimerRunning = true;
             OnTimerStarted?.Invoke();
-            Debug.Log("Timer started");
         }
 
         private void StopTimer()

@@ -6,10 +6,9 @@ using UnityEngine;
 
 namespace _Project.Scripts.Core.Circles
 {
-    // TODO: Handle circle click(add score)
-    // TODO: Circle spawn
     // TODO: Countdown timer
     // TODO: Input system
+
     public class Circle : MonoBehaviour
     {
         [SerializeField] private CircleCollider2D circleCollider2D;
@@ -24,6 +23,7 @@ namespace _Project.Scripts.Core.Circles
         private float _popScale;
 
         public event Action<Circle> OnCircleClicked;
+        public event Action<Circle> OnCircleDestroyed;
 
         public void Initialize(Color color, float size, float lifetime, CircleAnimationConfigSO circleAnimationConfigSO)
         {
@@ -90,8 +90,9 @@ namespace _Project.Scripts.Core.Circles
             DestroySelf();
         }
 
-        private void DestroySelf()
+        public void DestroySelf()
         {
+            OnCircleDestroyed?.Invoke(this);
             Destroy(gameObject);
         }
     }

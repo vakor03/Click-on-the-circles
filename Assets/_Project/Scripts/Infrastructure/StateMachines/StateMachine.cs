@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using _Project.Scripts.Infrastructure.StateMachines.States;
 
 namespace _Project.Scripts.Infrastructure.StateMachines
 {

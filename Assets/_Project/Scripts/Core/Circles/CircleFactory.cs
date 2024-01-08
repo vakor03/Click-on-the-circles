@@ -11,10 +11,13 @@ namespace _Project.Scripts.Core.Circles
     public class CircleFactory : ICircleFactory
     {
         private StaticDataService _staticDataService;
+        private CirclesHolder _circlesHolder;
 
-        public CircleFactory(StaticDataService staticDataService)
+        public CircleFactory(StaticDataService staticDataService, 
+            CirclesHolder circlesHolder)
         {
             _staticDataService = staticDataService;
+            _circlesHolder = circlesHolder;
         }
 
         public Circle Create(Vector2 position, float size, float lifetime, Color color)
@@ -27,6 +30,8 @@ namespace _Project.Scripts.Core.Circles
 
             circle.transform.position = position;
 
+            _circlesHolder.AddCircle(circle);
+            
             return circle;
         }
     }
