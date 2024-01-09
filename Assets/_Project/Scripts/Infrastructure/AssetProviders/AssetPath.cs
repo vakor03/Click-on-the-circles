@@ -10,5 +10,6 @@ namespace _Project.Scripts.Infrastructure.AssetProviders
         public const string CIRCLE_CONFIG = "Configs/CircleConfigSO";
         public const string CIRCLE_ANIMATION_CONFIG = "Configs/CircleAnimationConfigSO";
         public const string CIRCLE_SPAWNER_CONFIG = "Configs/CircleSpawnerConfigSO";
+        public const string AUDIO_MANAGER_CONFIG = "Configs/AudioManagerConfigSO";
     }
 }

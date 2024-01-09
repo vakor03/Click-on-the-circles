@@ -32,9 +32,6 @@ namespace _Project.Scripts.Core.Circles
             circle.OnCircleClicked -= HandleCircleClicked;
 
             OnCircleClicked?.Invoke(circle);
-
-            RemoveCircle(circle);
-            circle.DestroySelf();
         }
 
         public void RemoveCircle(Circle circle)

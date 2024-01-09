@@ -12,18 +12,25 @@ namespace _Project.Scripts.Infrastructure.Installers
         public override void InstallBindings()
         {
             BindStatesFactory();
-            
+
             BindCirclesHolder();
 
             BindCircleSpawner();
-            
+
             BindCircleFactory();
 
             BindWindowController();
-            
+
+            BindCircleRayhitDetector();
+
             BindGameplayStateMachine();
         }
-        
+
+        private void BindCircleRayhitDetector()
+        {
+            Container.Bind<CircleRayhitDetector>().AsSingle();
+        }
+
         private void BindCircleFactory()
         {
             Container.BindInterfacesAndSelfTo<CircleFactory>().AsSingle();

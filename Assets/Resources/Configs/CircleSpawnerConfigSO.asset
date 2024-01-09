@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnInterval: 2
   spawnIntervalDecrease: 0.2
-  minSpawnInterval: 0.5
+  minSpawnInterval: 1
   startSpawnInterval: 0.2
   minSpawnCount: 1
   maxSpawnCount: 4

@@ -16,7 +16,6 @@ namespace _Project.Scripts.Infrastructure.SceneLoader
         {
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
-            // Wait until the asynchronous scene fully loads
             while (!asyncLoad.isDone)
             {
                 yield return Timing.WaitForOneFrame;

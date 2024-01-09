@@ -7,14 +7,6 @@ using Zenject;
 
 namespace _Project.Scripts.Core.Circles
 {
-    public interface ICircleSpawner
-    {
-    }
-
-    // TODO: Gameplay installer
-    // TODO: Gameplay state machine
-    // TODO: max spawn count
-
     public class CircleSpawner : MonoBehaviour, ICircleSpawner, IInitializable
     {
         [SerializeField] private Transform spawnArea;
@@ -45,8 +37,19 @@ namespace _Project.Scripts.Core.Circles
 
             _currentSpawnTime = _circleSpawnerConfig.spawnInterval;
         }
+        
+        public void StartSpawning()
+        {
+            _coroutine = Timing.RunCoroutine(SpawnCoroutine());
+        }
 
-        public void Spawn()
+        public void Reset()
+        {
+            StopSpawning();
+            _currentSpawnTime = _circleSpawnerConfig.spawnInterval;
+        }
+
+        private void Spawn()
         {
             var spawnCount = CalculateSpawnCount();
 
@@ -90,17 +93,6 @@ namespace _Project.Scripts.Core.Circles
             Vector2 randomPosition = new Vector2(randomX, randomY) + (Vector2)spawnArea.position;
 
             return randomPosition;
-        }
-
-        public void StartSpawning()
-        {
-            _coroutine = Timing.RunCoroutine(SpawnCoroutine());
-        }
-
-        public void Reset()
-        {
-            StopSpawning();
-            _currentSpawnTime = _circleSpawnerConfig.spawnInterval;
         }
 
         private void StopSpawning()

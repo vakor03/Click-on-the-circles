@@ -26,6 +26,11 @@ namespace _Project.Scripts.Core.Score
             _scoreCounter.OnScoreChanged += HandleScoreChanged;
         }
         
+        private void OnDisable()
+        {
+            _scoreCounter.OnScoreChanged -= HandleScoreChanged;
+        }
+        
         private void HandleScoreChanged()
         {
             UpdateScore();
@@ -34,11 +39,6 @@ namespace _Project.Scripts.Core.Score
         private void UpdateScore()
         {
             scoreText.text = $"Score: {_scoreCounter.CurrentScore}";
-        }
-
-        private void OnDisable()
-        {
-            _scoreCounter.OnScoreChanged -= HandleScoreChanged;
         }
     }
 }

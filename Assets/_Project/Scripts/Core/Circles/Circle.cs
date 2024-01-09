@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Project.Scripts.Configs;
 using DG.Tweening;
 using MEC;
 using UnityEngine;
 
 namespace _Project.Scripts.Core.Circles
 {
-    // TODO: Countdown timer
-    // TODO: Input system
-
     public class Circle : MonoBehaviour
     {
         [SerializeField] private CircleCollider2D circleCollider2D;
@@ -40,19 +38,6 @@ namespace _Project.Scripts.Core.Circles
             spriteRenderer.color = color;
         }
 
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                if (circleCollider2D.OverlapPoint(mousePosition))
-                {
-                    OnCircleClicked?.Invoke(this);
-                    RunPopUpAnimation();
-                }
-            }
-        }
-
         private void Start()
         {
             RunGrowAnimation();
@@ -64,6 +49,17 @@ namespace _Project.Scripts.Core.Circles
             _popSequence?.Kill();
         }
 
+        public void RunCircleClickedBehaviour()
+        {
+            OnCircleClicked?.Invoke(this);
+            RunPopUpAnimation();
+        }
+
+        public void DestroySelf()
+        {
+            OnCircleDestroyed?.Invoke(this);
+            Destroy(gameObject);
+        }
         private void RunPopUpAnimation()
         {
             var currentScale = transform.localScale;
@@ -97,12 +93,6 @@ namespace _Project.Scripts.Core.Circles
         {
             yield return Timing.WaitForSeconds(_lifeTime);
             DestroySelf();
-        }
-
-        public void DestroySelf()
-        {
-            OnCircleDestroyed?.Invoke(this);
-            Destroy(gameObject);
         }
     }
 }

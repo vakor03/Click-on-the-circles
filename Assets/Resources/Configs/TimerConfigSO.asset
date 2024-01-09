@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b9bd0ea9f640d6830d67cfdd39748f, type: 3}
   m_Name: TimerConfigSO
   m_EditorClassIdentifier: 
-  <MaxTimer>k__BackingField: 10
+  <MaxTimer>k__BackingField: 20

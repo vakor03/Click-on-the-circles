@@ -12,6 +12,7 @@ namespace _Project.Scripts.Infrastructure.AssetProviders
         private CircleConfigSO _circleConfig;
         private CircleAnimationConfigSO _circleAnimationConfig;
         private CircleSpawnerConfigSO _circleSpawnerConfig;
+        private AudioManagerConfigSO _audioManagerConfig;
 
         public StaticDataService(IAssetProvider assetProvider)
         {
@@ -24,43 +25,54 @@ namespace _Project.Scripts.Infrastructure.AssetProviders
             LoadCircleConfig();
             LoadCircleAnimationConfig();
             LoadCircleSpawnerConfig();
+            LoadAudioManagerConfig();
         }
 
         public TimerConfigSO GetTimerConfig()
         {
             return _timerConfig;
         }
-        
+
         public CircleConfigSO GetCircleConfig()
         {
             return _circleConfig;
         }
-        
+
         public CircleAnimationConfigSO GetCircleAnimationConfig()
         {
             return _circleAnimationConfig;
         }
-        
+
         public CircleSpawnerConfigSO GetCircleSpawnerConfig()
         {
             return _circleSpawnerConfig;
+        }
+
+        public AudioManagerConfigSO GetAudioManagerConfig()
+        {
+            return _audioManagerConfig;
         }
 
         private void LoadTimerConfig()
         {
             _timerConfig = _assetProvider.Load<TimerConfigSO>(AssetPath.TIMER_CONFIG);
         }
-        
+
         private void LoadCircleConfig()
         {
             _circleConfig = _assetProvider.Load<CircleConfigSO>(AssetPath.CIRCLE_CONFIG);
         }
-        
+
+        private void LoadAudioManagerConfig()
+        {
+            _audioManagerConfig = _assetProvider.Load<AudioManagerConfigSO>(AssetPath.AUDIO_MANAGER_CONFIG);
+        }
+
         private void LoadCircleAnimationConfig()
         {
             _circleAnimationConfig = _assetProvider.Load<CircleAnimationConfigSO>(AssetPath.CIRCLE_ANIMATION_CONFIG);
         }
-        
+
         private void LoadCircleSpawnerConfig()
         {
             _circleSpawnerConfig = _assetProvider.Load<CircleSpawnerConfigSO>(AssetPath.CIRCLE_SPAWNER_CONFIG);

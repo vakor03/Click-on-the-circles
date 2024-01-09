@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Core.Score;
+﻿using _Project.Scripts.Core.Circles;
+using _Project.Scripts.Core.Score;
 using _Project.Scripts.Core.Timer;
 using _Project.Scripts.Infrastructure.AssetProviders;
 using _Project.Scripts.Infrastructure.StateMachines;
@@ -11,15 +12,32 @@ namespace _Project.Scripts.Infrastructure.Installers
         public override void InstallBindings()
         {
             BindSceneLoader();
+            
             BindStaticDataService();
 
             BindTimerService();
+            
             BindScoreCounterService();
 
             BindAssetProvider();
 
             BindStatesFactory();
+            
             BindGameStateMachine();
+
+            BindAudioManager();
+
+            BindInputService();
+        }
+
+        private void BindAudioManager()
+        {
+            Container.BindInterfacesAndSelfTo<AudioManager>().AsSingle();
+        }
+
+        private void BindInputService()
+        {
+            Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
         }
 
         private void BindAssetProvider()

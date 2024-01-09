@@ -9,6 +9,12 @@ namespace _Project.Scripts.Core.Timer
         public float MaxTime { get; private set; }
         public float CurrentTime { get; private set; }
 
+        private bool _isTimerRunning;
+
+        public event Action OnTimerStarted;
+        public event Action OnTimerFinished;
+        public event Action OnTimerTicked;
+
         public void Initialize(float maxTime)
         {
             MaxTime = maxTime;
@@ -18,12 +24,6 @@ namespace _Project.Scripts.Core.Timer
         {
             CurrentTime -= timeToRemove;
         }
-
-        public event Action OnTimerStarted;
-        public event Action OnTimerFinished;
-        public event Action OnTimerTicked;
-
-        private bool _isTimerRunning;
 
         public void Tick()
         {
@@ -45,16 +45,16 @@ namespace _Project.Scripts.Core.Timer
             OnTimerStarted?.Invoke();
         }
 
-        private void StopTimer()
-        {
-            _isTimerRunning = false;
-            OnTimerFinished?.Invoke();
-        }
-
         public void Reset()
         {
             CurrentTime = 0f;
             _isTimerRunning = false;
+        }
+
+        private void StopTimer()
+        {
+            _isTimerRunning = false;
+            OnTimerFinished?.Invoke();
         }
     }
 }

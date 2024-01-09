@@ -21,6 +21,11 @@ namespace _Project.Scripts.Core.Timer
             _timer.OnTimerTicked += HandleTimerTicked;
         }
 
+        private void OnDisable()
+        {
+            _timer.OnTimerTicked -= HandleTimerTicked;
+        }
+
         private void HandleTimerTicked()
         {
             float timeLeft = _timer.MaxTime - _timer.CurrentTime;
@@ -28,11 +33,6 @@ namespace _Project.Scripts.Core.Timer
             int millis = (int)(timeLeft * 100) % 100;
 
             timerText.text = $"{seconds}:{millis}";
-        }
-
-        private void OnDisable()
-        {
-            _timer.OnTimerTicked -= HandleTimerTicked;
         }
     }
 }

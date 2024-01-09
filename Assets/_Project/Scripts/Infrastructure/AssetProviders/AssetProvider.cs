@@ -8,10 +8,5 @@ namespace _Project.Scripts.Infrastructure.AssetProviders
         {
             return Resources.Load<TAsset>(key);
         }
-
-        public TAsset[] LoadAll<TAsset>(string key) where TAsset : Object
-        {
-            return Resources.LoadAll<TAsset>(key);
-        }
     }
 }
